@@ -1,0 +1,107 @@
+[
+  {
+    "id": "institut-ramadan-2e",
+    "tag": "Mois de Ramadan",
+    "title": "Institut du Ramadan – 2ème édition",
+    "excerpt": "Pendant tout le mois de Ramadan, les élèves participent à l’Institut du Ramadan : récitation, mémorisation, rappels et ateliers adaptés à chaque âge.",
+    "content": [
+      "Keur Yaye Sokhna Gueye Bilingual School organise une nouvelle édition de son Institut du Ramadan, un programme spirituel et éducatif qui se déroule tout au long du mois béni.",
+      "Au programme : mémorisation, tajwid, rappels, ateliers et moments de partage. Les élèves développent leur discipline et renforcent leur lien au Coran.",
+      "Des instants de récitation publique sont organisés avec les familles afin de valoriser les efforts des enfants et de renforcer le lien école–famille."
+    ],
+    "images": [
+      {
+        "src": "ramadan.jpeg",
+        "alt": "Affiche de l’Institut du Ramadan à KYSGBS"
+      },
+      {
+        "src": "conf.jpg",
+        "alt": "Séance de mémorisation et d’apprentissage (Tahfiz) à KYSGBS"
+      }
+    ]
+  },
+  {
+    "id": "kysgbc-dakar-2026",
+    "tag": "Partenariat",
+    "title": "Collaboration KYSGBS x Dakar 2026",
+    "excerpt": "Une collaboration entre l’école et les Jeux Olympiques de la Jeunesse Dakar 2026 autour du sport, des valeurs olympiques et de l’éducation.",
+    "content": [
+      "Keur Yaye Sokhna Gueye Bilingual School s’associe à la dynamique des Jeux Olympiques de la Jeunesse Dakar 2026 pour promouvoir le sport, l’effort et le fair-play chez les élèves.",
+      "Des activités pédagogiques et sportives sont organisées autour des valeurs olympiques : respect, amitié, dépassement de soi et excellence.",
+      "Ce partenariat permet de lier l’éducation, la santé et le bien-être des enfants à travers des projets concrets au sein de l’école."
+    ],
+    "images": [
+      {
+        "src": "dakar-2026-collab.png",
+        "alt": "Affiche KYSGBS Bilingual School – Dakar 2026 Youth Olympic Games"
+      },
+      {
+        "src": "dakar-2026-mascotte.png",
+        "alt": "Mascotte Dakar 2026 avec les enfants"
+      }
+    ]
+  },
+  {
+    "id": "sortie-pedagogique-lecture",
+    "tag": "Sortie pédagogique",
+    "title": "Visite pédagogique à la Base aérienne de Ouakam",
+    "excerpt": "Les élèves de Keur Yaye Sokhna Gueye Bilingual School ont effectué une visite pédagogique à la Base aérienne de Ouakam, pour découvrir les métiers, l’organisation et l’univers aéronautique.",
+    "content": [
+      "Les élèves de Keur Yaye Sokhna Gueye Bilingual School ont participé à une visite pédagogique à la Base aérienne de Ouakam.",
+      "Cette sortie a permis de découvrir l’environnement aéronautique, l’organisation d’une base et les métiers liés à l’aviation.",
+      "Un moment riche en apprentissages, échanges et curiosité, qui relie les notions vues en classe à une expérience concrète."
+    ],
+    "images": [
+      {
+        "src": "visite-ouakam-cover.png",
+        "alt": "Visite pédagogique KYSGBS à la Base aérienne de Ouakam"
+      },
+      {
+        "src": "visite-ouakam-eleves-avion.png",
+        "alt": "Élèves de KYSGBS devant un avion à la Base aérienne de Ouakam"
+      }
+    ]
+  },
+  {
+    "id": "sortie-pedagogique-sciences",
+    "tag": "Sortie pédagogique",
+    "title": "Visite pédagogique aux Mamelles (Phare des Mamelles)",
+    "excerpt": "Les élèves de Keur Yaye Sokhna Gueye Bilingual School ont effectué une visite pédagogique aux Mamelles, à la découverte du Phare et de son histoire.",
+    "content": [
+      "Les élèves de Keur Yaye Sokhna Gueye Bilingual School ont participé à une sortie pédagogique aux Mamelles (Phare des Mamelles).",
+      "Cette visite a été l’occasion de découvrir un lieu emblématique de Dakar, son rôle, son fonctionnement et quelques repères historiques.",
+      "Une expérience éducative riche, combinant observation, culture générale et apprentissage en dehors de la classe."
+    ],
+    "images": [
+      {
+        "src": "sortie-mamelles-cover.png",
+        "alt": "Visite pédagogique KYSGBS aux Mamelles (Phare des Mamelles)"
+      },
+      {
+        "src": "sortie-mamelles-eleves.png",
+        "alt": "Élèves de KYSGBS lors de la visite aux Mamelles"
+      }
+    ]
+  },
+  {
+    "id": "portes-ouvertes",
+    "tag": "Événement",
+    "title": "Journée portes ouvertes avec les parents",
+    "excerpt": "Rencontre école–famille : échanges, présentation des activités, découverte des salles et du projet pédagogique.",
+    "content": [
+      "Nous avons accueilli les parents pour une journée portes ouvertes afin de partager la vie de l’école et les progrès des élèves.",
+      "Au programme : visite des classes, échanges avec l’équipe pédagogique, et présentation de travaux réalisés par les enfants.",
+      "Un moment convivial pour renforcer la confiance et la communication régulière avec les familles."
+    ],
+    "images": [
+      {
+        "src": "one (6).png",
+        "alt": "Parents et élèves lors d’une journée portes ouvertes"
+      },
+      {
+        "src": "iconic.jpg",
+        "alt": "Moment de vie et d’échange à l’école"
+      }
+    ]
+  }
+]
