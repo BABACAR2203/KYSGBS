@@ -84,23 +84,19 @@
     ]
   },
   {
-    "id": "portes-ouvertes",
-    "tag": "Événement",
-    "title": "Journée portes ouvertes avec les parents",
-    "excerpt": "Rencontre école–famille : échanges, présentation des activités, découverte des salles et du projet pédagogique.",
+    "id": "ceremonie-lever-couleurs-2e-edition",
+    "tag": "Événement civique",
+    "title": "Cérémonie de levée des couleurs – 2ème édition",
+    "excerpt": "Pour la 2ème année consécutive, KYSGBS a organisé une cérémonie de levée des couleurs en partenariat avec la Musique de la Gendarmerie Nationale, réunissant élèves, familles et forces de l’ordre autour des valeurs civiques et citoyennes.",
     "content": [
-      "Nous avons accueilli les parents pour une journée portes ouvertes afin de partager la vie de l’école et les progrès des élèves.",
-      "Au programme : visite des classes, échanges avec l’équipe pédagogique, et présentation de travaux réalisés par les enfants.",
-      "Un moment convivial pour renforcer la confiance et la communication régulière avec les familles."
+      "Keur Yaye Sokhna Gueye Bilingual School a organisé la 2ème édition de sa cérémonie de levée des couleurs, un moment fort ancré dans les valeurs civiques et citoyennes qui font partie intégrante du projet éducatif de l’école.",
+      "En partenariat avec la Musique de la Gendarmerie Nationale du Sénégal (MUSIGN), cet événement a réuni élèves, enseignants, parents et représentants des forces de l’ordre autour du drapeau sénégalais, dans un esprit de discipline, de fierté nationale et de respect mutuel.",
+      "Cette initiative s’inscrit dans la volonté de l’école de former des enfants citoyens, conscients de leurs responsabilités envers leur pays et leur communauté, unis par les valeurs d’éducation, de discipline, de culture et de citoyenneté."
     ],
     "images": [
       {
-        "src": "one (6).png",
-        "alt": "Parents et élèves lors d’une journée portes ouvertes"
-      },
-      {
-        "src": "iconic.jpg",
-        "alt": "Moment de vie et d’échange à l’école"
+        "src": "ceremonie-lever-couleurs-partenariat-musign.png",
+        "alt": "Affiche du partenariat KYSGBS et Musique de la Gendarmerie Nationale – Levée des couleurs"
       }
     ]
   }

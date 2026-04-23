@@ -72,7 +72,7 @@
           </div>
 
           <h3>Formulaire de contact</h3>
-          <form class="form" id="contact-form">
+          <form class="form" id="contact-form" action="https://formspree.io/f/mqewwleb" method="POST">
             <div class="form-row">
               <div class="form-field">
                 <label for="contact-name">Nom complet</label>
@@ -95,6 +95,8 @@
               <label for="contact-message">Message</label>
               <textarea id="contact-message" name="message" rows="4" required></textarea>
             </div>
+            <input type="hidden" name="_subject" value="Nouveau message – KYSGBS" />
+            <input type="hidden" name="_next" value="" />
             <button type="submit" class="btn">Envoyer le message</button>
             <p class="form-success" id="contact-success" hidden>
               Merci pour votre message. Nous vous répondrons rapidement.
@@ -188,4 +190,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
