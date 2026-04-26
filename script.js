@@ -125,10 +125,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         return `
           <article class="blog-card" id="${id}">
-            ${tag ? `<span class="news-date">${tag}</span>` : ""}
-            <h2>${title}</h2>
             ${imagesHtml}
-            ${contentHtml}
+            <div class="blog-card-body">
+              ${tag ? `<span class="news-date">${tag}</span>` : ""}
+              <h2>${title}</h2>
+              ${contentHtml}
+            </div>
           </article>
         `;
       })
@@ -221,3 +223,102 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+
+// ===== LIGHTBOX =====
+(function () {
+  // Créer l'overlay
+  const overlay = document.createElement("div");
+  overlay.className = "lightbox-overlay";
+  overlay.innerHTML = `
+    <div class="lightbox-inner">
+      <button class="lightbox-close" aria-label="Fermer">&#x2715;</button>
+      <button class="lightbox-btn prev" aria-label="Précédent">&#8592;</button>
+      <img class="lightbox-img" src="" alt="" />
+      <button class="lightbox-btn next" aria-label="Suivant">&#8594;</button>
+      <span class="lightbox-counter"></span>
+      <p class="lightbox-caption"></p>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+
+  const img = overlay.querySelector(".lightbox-img");
+  const caption = overlay.querySelector(".lightbox-caption");
+  const counter = overlay.querySelector(".lightbox-counter");
+  const btnClose = overlay.querySelector(".lightbox-close");
+  const btnPrev = overlay.querySelector(".prev");
+  const btnNext = overlay.querySelector(".next");
+
+  let images = [];
+  let current = 0;
+
+  function getImages() {
+    return Array.from(document.querySelectorAll(".gallery-img, .news-image"));
+  }
+
+  function open(index) {
+    images = getImages();
+    current = index;
+    show();
+    overlay.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function close() {
+    overlay.classList.remove("is-open");
+    document.body.style.overflow = "";
+  }
+
+  function show() {
+    const el = images[current];
+    img.classList.add("is-loading");
+    img.onload = () => img.classList.remove("is-loading");
+    img.src = el.src;
+    img.alt = el.alt || "";
+    caption.textContent = el.alt || "";
+    counter.textContent = `${current + 1} / ${images.length}`;
+  }
+
+  function prev() {
+    current = (current - 1 + images.length) % images.length;
+    show();
+  }
+
+  function next() {
+    current = (current + 1) % images.length;
+    show();
+  }
+
+  // Attacher les clics sur les images
+  document.addEventListener("click", (e) => {
+    const el = e.target.closest(".gallery-img, .news-image");
+    if (!el) return;
+    const all = getImages();
+    const index = all.indexOf(el);
+    if (index !== -1) open(index);
+  });
+
+  btnClose.addEventListener("click", close);
+  btnPrev.addEventListener("click", prev);
+  btnNext.addEventListener("click", next);
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) close();
+  });
+
+  // Clavier
+  document.addEventListener("keydown", (e) => {
+    if (!overlay.classList.contains("is-open")) return;
+    if (e.key === "ArrowLeft") prev();
+    if (e.key === "ArrowRight") next();
+    if (e.key === "Escape") close();
+  });
+
+  // Swipe mobile
+  let touchStartX = 0;
+  overlay.addEventListener("touchstart", (e) => {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+  overlay.addEventListener("touchend", (e) => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) diff > 0 ? next() : prev();
+  }, { passive: true });
+})();
