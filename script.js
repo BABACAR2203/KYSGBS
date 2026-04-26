@@ -157,37 +157,33 @@ document.addEventListener("DOMContentLoaded", () => {
   const contactForm = document.getElementById("contact-form");
   const contactSuccess = document.getElementById("contact-success");
   if (contactForm) {
-    contactForm.addEventListener("submit", (e) => {
+    contactForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const name = document.getElementById("contact-name")?.value.trim() || "";
-      const phone = document.getElementById("contact-phone")?.value.trim() || "";
-      const message = document.getElementById("contact-message")?.value.trim() || "";
+      const btn = contactForm.querySelector("button[type=submit]");
+      btn.disabled = true;
+      btn.textContent = "Envoi en cours...";
 
-      const phoneDigitsOnly = phone.replace(/\D/g, "");
-      if (!phoneDigitsOnly) {
-        alert("Merci d’entrer un numéro de téléphone valide.");
-        return;
+      try {
+        const res = await fetch(contactForm.action, {
+          method: "POST",
+          body: new FormData(contactForm),
+          headers: { Accept: "application/json" },
+        });
+
+        if (res.ok) {
+          if (contactSuccess) contactSuccess.hidden = false;
+          contactForm.reset();
+          btn.textContent = "Message envoyé ✓";
+        } else {
+          btn.disabled = false;
+          btn.textContent = "Envoyer le message";
+          alert("Une erreur est survenue. Veuillez réessayer.");
+        }
+      } catch {
+        btn.disabled = false;
+        btn.textContent = "Envoyer le message";
+        alert("Une erreur est survenue. Vérifiez votre connexion.");
       }
-
-      const baseUrl = "https://wa.me/221772864894";
-      const textLines = [
-        "NOUVEAU MESSAGE DEPUIS LE FORMULAIRE DE CONTACT KYSGBS",
-        "",
-        `Nom : ${name}`,
-        `Téléphone : ${phoneDigitsOnly}`,
-        "",
-        "Message :",
-        message,
-      ];
-      const text = encodeURIComponent(textLines.join("\n"));
-      const url = `${baseUrl}?text=${text}`;
-
-      window.open(url, "_blank");
-
-      if (contactSuccess) {
-        contactSuccess.hidden = false;
-      }
-      contactForm.reset();
     });
   }
 
@@ -321,4 +317,43 @@ document.addEventListener("DOMContentLoaded", () => {
     const diff = touchStartX - e.changedTouches[0].clientX;
     if (Math.abs(diff) > 50) diff > 0 ? next() : prev();
   }, { passive: true });
+})();
+
+// ===== COMPTEUR ANIMÉ (À propos) =====
+(function () {
+  const stats = document.querySelectorAll(".about-stat strong");
+  if (!stats.length) return;
+
+  function animateCounter(el) {
+    const text = el.textContent.trim();
+    const prefix = text.startsWith("+") ? "+" : "";
+    const suffix = text.endsWith("%") ? "%" : "";
+    const target = parseInt(text.replace(/[^0-9]/g, ""), 10);
+    if (isNaN(target)) return;
+
+    const duration = 1800;
+    const steps = 60;
+    const stepTime = duration / steps;
+    let current = 0;
+
+    const timer = setInterval(() => {
+      current += target / steps;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+      el.textContent = prefix + Math.floor(current) + suffix;
+    }, stepTime);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        stats.forEach((el) => animateCounter(el));
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+
+  observer.observe(document.querySelector(".about-stats-section") || stats[0].closest("section"));
 })();

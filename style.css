@@ -302,17 +302,17 @@ main {
   box-shadow: 0 20px 45px rgba(15, 23, 42, 0.4);
 }
 
-.about-photo-stack {
-  display: grid;
-  gap: 0.75rem;
-}
-
 .about-photo-stack img {
   width: 100%;
   border-radius: 1.1rem;
   object-fit: cover;
   aspect-ratio: 4 / 3;
   box-shadow: 0 16px 40px rgba(148, 163, 184, 0.5);
+  object-position: center top;
+}
+
+.about-photo-stack img:last-child {
+  object-position: center 15%;
 }
 
 .highlight-card {
@@ -654,6 +654,10 @@ main {
   border: 1px solid rgba(148, 163, 184, 0.4);
 }
 
+.programme-block img {
+  object-position: center 15%;
+}
+
 .programme-block {
   padding: 1.7rem 1.8rem;
   border-radius: 1.25rem;
@@ -818,13 +822,10 @@ main {
   gap: 1.8rem;
 }
 
-<<<<<<< HEAD
 #all-news-list .blog-card:last-child {
   margin-bottom: 0;
 }
 
-=======
->>>>>>> 78f6423c6b59c871fb14f14745fa038a01a6feb8
 #all-news-list .blog-card:last-child:nth-child(odd) {
   grid-column: 1 / -1;
   grid-template-columns: 340px minmax(0, 1fr);
@@ -832,7 +833,6 @@ main {
 }
 
 #all-news-list .blog-card:last-child:nth-child(odd) .news-images {
-<<<<<<< HEAD
   height: 320px;
   max-height: 320px;
   flex-direction: column;
@@ -842,10 +842,6 @@ main {
   height: 100%;
   max-height: 380px;
   object-position: center;
-=======
-  height: 100%;
-  flex-direction: column;
->>>>>>> 78f6423c6b59c871fb14f14745fa038a01a6feb8
 }
 
 #all-news-list .blog-card:last-child:nth-child(odd) .blog-card-body {
@@ -864,7 +860,6 @@ main {
   grid-row: 1;
   height: 220px;
   flex-direction: row;
-<<<<<<< HEAD
   overflow: hidden;
 }
 
@@ -873,8 +868,6 @@ main {
   max-height: 220px;
   object-fit: cover;
   object-position: center top;
-=======
->>>>>>> 78f6423c6b59c871fb14f14745fa038a01a6feb8
 }
 
 #all-news-list .blog-card .blog-card-body {
@@ -1345,5 +1338,343 @@ select:focus {
   .lightbox-caption {
     max-width: 85%;
     font-size: 0.78rem;
+  }
+}
+
+/* ===== À PROPOS — CHIFFRES CLÉS ===== */
+.about-stats-section {
+  background: linear-gradient(135deg, #059669, #0ea5e9);
+  padding-block: 2.5rem;
+}
+
+.about-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.about-stat strong {
+  display: block;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.about-stat span {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+}
+
+/* ===== À PROPOS — VALEURS ===== */
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.value-card {
+  padding: 1.6rem 1.4rem;
+  border-radius: 1.25rem;
+  background: #fff;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow: 0 15px 35px rgba(148, 163, 184, 0.2);
+  text-align: center;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 50px rgba(15, 118, 110, 0.2);
+}
+
+.value-icon {
+  font-size: 2.2rem;
+  margin-bottom: 0.75rem;
+}
+
+.value-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  color: #059669;
+}
+
+.value-card p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+/* ===== À PROPOS — ÉQUIPE icône ===== */
+.team-icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.6rem;
+}
+
+@media (max-width: 920px) {
+  .about-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .values-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .about-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .values-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ===== HIGHLIGHTS GRID (Accueil) ===== */
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.highlight-item {
+  padding: 1.6rem 1.5rem;
+  border-radius: 1.25rem;
+  background: #fff;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow: 0 15px 35px rgba(148, 163, 184, 0.18);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.highlight-item:hover {
+  transform: translateY(-4px);
+  border-color: #059669;
+  box-shadow: 0 22px 50px rgba(15, 118, 110, 0.2);
+}
+
+.highlight-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.highlight-item h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  color: #0f172a;
+}
+
+.highlight-item p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #4b5563;
+  line-height: 1.65;
+}
+
+@media (max-width: 920px) {
+  .highlights-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .highlights-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ===== PROGRAMMES ===== */
+.prog-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.prog-pillar {
+  padding: 2rem 1.5rem;
+  border-radius: 1.25rem;
+  background: #fff;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow: 0 15px 35px rgba(148, 163, 184, 0.18);
+  text-align: center;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.prog-pillar:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 50px rgba(15, 118, 110, 0.2);
+}
+
+.prog-pillar--accent {
+  background: linear-gradient(135deg, #059669, #0ea5e9);
+  border-color: transparent;
+  color: #fff;
+}
+
+.prog-pillar--accent h3,
+.prog-pillar--accent p {
+  color: #fff;
+}
+
+.prog-pillar--accent p {
+  opacity: 0.9;
+}
+
+.prog-pillar-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.prog-pillar h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+}
+
+.prog-pillar p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+.prog-block-alt {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: 3rem;
+  align-items: center;
+}
+
+.prog-block-alt--reverse {
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+}
+
+.prog-block-alt--reverse .prog-block-text {
+  order: 2;
+}
+
+.prog-block-alt--reverse .prog-block-visual {
+  order: 1;
+}
+
+.prog-block-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.prog-big-icon {
+  font-size: 2rem;
+}
+
+.prog-block-text h2 {
+  margin: 0.3rem 0 0.5rem;
+}
+
+.prog-block-text .tag {
+  margin-bottom: 1rem;
+  display: inline-flex;
+}
+
+.prog-block-text p {
+  margin-bottom: 0.75rem;
+}
+
+.prog-block-visual {
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 24px 56px rgba(15, 23, 42, 0.25);
+}
+
+.prog-visual--green {
+  border: 3px solid #059669;
+}
+
+.prog-visual--blue {
+  border: 3px solid #0ea5e9;
+}
+
+.prog-visual-inner img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+/* CORAN section spéciale */
+.prog-coran-section {
+  background: linear-gradient(135deg, #064e3b, #065f46, #0f766e);
+  color: #fff;
+  padding-block: 4rem;
+}
+
+.prog-coran-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+  gap: 3rem;
+  align-items: start;
+}
+
+.prog-coran-header {
+  text-align: left;
+}
+
+.prog-coran-header h2 {
+  color: #fff;
+  margin: 0.3rem 0 0.75rem;
+  font-size: 1.8rem;
+}
+
+.prog-coran-content p {
+  color: rgba(255, 255, 255, 0.88);
+  margin-bottom: 0.75rem;
+  line-height: 1.7;
+}
+
+.prog-coran-points {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+}
+
+.prog-coran-point {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.75rem;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+@media (max-width: 920px) {
+  .prog-pillars {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .prog-block-alt,
+  .prog-block-alt--reverse {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .prog-block-alt--reverse .prog-block-text {
+    order: 1;
+  }
+
+  .prog-block-alt--reverse .prog-block-visual {
+    order: 2;
+  }
+
+  .prog-coran-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .prog-coran-points {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
