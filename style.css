@@ -1007,7 +1007,7 @@ select:focus {
   }
 
   .hero-image-card {
-    max-width: 420px;
+    max-width: 100%;
     margin-inline: auto;
     margin-top: 0.5rem;
   }
