@@ -1603,6 +1603,7 @@ select:focus {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+  object-position: center top;
   display: block;
 }
 
@@ -1785,4 +1786,20 @@ select:focus {
   .directeur-quote p {
     font-size: 0.95rem;
   }
+}
+
+/* PDF download button */
+.btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.9rem;
+  background: #e11d48;
+  color: #fff;
+  border-radius: 0.6rem;
+  text-decoration: none;
+  font-weight: 600;
+}
+.btn-download:hover {
+  background: #be123c;
 }

@@ -157,33 +157,37 @@ document.addEventListener("DOMContentLoaded", () => {
   const contactForm = document.getElementById("contact-form");
   const contactSuccess = document.getElementById("contact-success");
   if (contactForm) {
-    contactForm.addEventListener("submit", async (e) => {
+    contactForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      const btn = contactForm.querySelector("button[type=submit]");
-      btn.disabled = true;
-      btn.textContent = "Envoi en cours...";
 
-      try {
-        const res = await fetch(contactForm.action, {
-          method: "POST",
-          body: new FormData(contactForm),
-          headers: { Accept: "application/json" },
-        });
+      const name = document.getElementById("contact-name")?.value.trim();
+      const phone = document.getElementById("contact-phone")?.value.trim();
+      const message = document.getElementById("contact-message")?.value.trim();
 
-        if (res.ok) {
-          if (contactSuccess) contactSuccess.hidden = false;
-          contactForm.reset();
-          btn.textContent = "Message envoyé ✓";
-        } else {
-          btn.disabled = false;
-          btn.textContent = "Envoyer le message";
-          alert("Une erreur est survenue. Veuillez réessayer.");
-        }
-      } catch {
-        btn.disabled = false;
-        btn.textContent = "Envoyer le message";
-        alert("Une erreur est survenue. Vérifiez votre connexion.");
+      if (!name || !phone || !message) {
+        alert("Veuillez remplir tous les champs avant d'envoyer le message.");
+        return;
       }
+
+      const phoneNumber = "221772864894";
+      const textLines = [
+        `Nom complet : ${name}`,
+        `Téléphone : ${phone}`,
+        "",
+        "Message :",
+        message,
+      ];
+      const whatsappText = encodeURIComponent(textLines.join("\n"));
+      const whatsappUrl = `https://wa.me/${phoneNumber}?text=${whatsappText}`;
+
+      window.open(whatsappUrl, "_blank");
+
+      if (contactSuccess) {
+        contactSuccess.hidden = false;
+        contactSuccess.textContent = "Votre message est prêt à être envoyé sur WhatsApp.";
+      }
+
+      contactForm.reset();
     });
   }
 
