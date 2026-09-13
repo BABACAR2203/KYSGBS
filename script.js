@@ -4,6 +4,48 @@ document.addEventListener("DOMContentLoaded", () => {
     yearSpan.textContent = new Date().getFullYear();
   }
 
+  const countdownSection = document.getElementById("rentree-countdown");
+  if (countdownSection) {
+    const targetDate = new Date(countdownSection.dataset.target);
+    const hideAfterDate = new Date(countdownSection.dataset.hideAfter);
+    const timer = document.getElementById("countdown-timer");
+    const liveMessage = document.getElementById("countdown-live-message");
+
+    const tick = () => {
+      const now = new Date();
+
+      if (now >= hideAfterDate) {
+        countdownSection.remove();
+        return;
+      }
+
+      if (now >= targetDate) {
+        if (timer) timer.hidden = true;
+        if (liveMessage) liveMessage.hidden = false;
+        return;
+      }
+
+      const diffMs = targetDate - now;
+      const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diffMs / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diffMs / (1000 * 60)) % 60);
+      const seconds = Math.floor((diffMs / 1000) % 60);
+
+      const pad = (n) => String(n).padStart(2, "0");
+      const daysEl = countdownSection.querySelector('[data-unit="days"]');
+      const hoursEl = countdownSection.querySelector('[data-unit="hours"]');
+      const minutesEl = countdownSection.querySelector('[data-unit="minutes"]');
+      const secondsEl = countdownSection.querySelector('[data-unit="seconds"]');
+      if (daysEl) daysEl.textContent = pad(days);
+      if (hoursEl) hoursEl.textContent = pad(hours);
+      if (minutesEl) minutesEl.textContent = pad(minutes);
+      if (secondsEl) secondsEl.textContent = pad(seconds);
+    };
+
+    tick();
+    setInterval(tick, 1000);
+  }
+
   /** Affiché si events.json est introuvable (ex. ouverture locale file://) ou vide. */
   const DEFAULT_EVENTS = [
     {
@@ -47,6 +89,21 @@ document.addEventListener("DOMContentLoaded", () => {
     return DEFAULT_EVENTS;
   }
 
+  function formatEventDate(value) {
+    if (!value) return "";
+    const d = new Date(`${value}T00:00:00`);
+    if (Number.isNaN(d.getTime())) return "";
+    return new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "long", year: "numeric" }).format(d);
+  }
+
+  function sortEventsByDateDesc(events) {
+    return events.slice().sort((a, b) => {
+      const da = a?.date ? new Date(a.date).getTime() : -Infinity;
+      const db = b?.date ? new Date(b.date).getTime() : -Infinity;
+      return db - da;
+    });
+  }
+
   function escapeHtml(value) {
     return String(value)
       .replaceAll("&", "&amp;")
@@ -60,13 +117,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const mount = document.getElementById("news-list");
     if (!mount) return;
 
-    const items = events.slice(0, 4);
+    const items = sortEventsByDateDesc(events).slice(0, 4);
     mount.innerHTML = items
       .map((event) => {
         const tag = escapeHtml(event.tag || "");
         const title = escapeHtml(event.title || "");
         const excerpt = escapeHtml(event.excerpt || "");
         const id = encodeURIComponent(event.id || "");
+        const publishedDate = formatEventDate(event.date);
 
         const images = Array.isArray(event.images) ? event.images.slice(0, 2) : [];
         const imagesHtml =
@@ -85,6 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return `
           <article class="news-card">
             ${tag ? `<span class="news-date">${tag}</span>` : ""}
+            ${publishedDate ? `<span class="news-published">${publishedDate}</span>` : ""}
             <h3>${title}</h3>
             ${imagesHtml}
             <p>${excerpt}</p>
@@ -99,11 +158,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const mount = document.getElementById("all-news-list");
     if (!mount) return;
 
-    mount.innerHTML = events
+    mount.innerHTML = sortEventsByDateDesc(events)
       .map((event) => {
         const tag = escapeHtml(event.tag || "");
         const title = escapeHtml(event.title || "");
         const id = escapeHtml(event.id || "");
+        const publishedDate = formatEventDate(event.date);
         const paragraphs = Array.isArray(event.content) ? event.content : [];
         const images = Array.isArray(event.images) ? event.images : [];
 
@@ -128,6 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
             ${imagesHtml}
             <div class="blog-card-body">
               ${tag ? `<span class="news-date">${tag}</span>` : ""}
+              ${publishedDate ? `<span class="news-published">${publishedDate}</span>` : ""}
               <h2>${title}</h2>
               ${contentHtml}
             </div>
@@ -154,8 +215,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  async function submitToFormspree(form) {
+    const res = await fetch(form.action, {
+      method: "POST",
+      body: new FormData(form),
+      headers: { Accept: "application/json" },
+    });
+    if (!res.ok) throw new Error("Formspree submission failed");
+  }
+
   const contactForm = document.getElementById("contact-form");
   const contactSuccess = document.getElementById("contact-success");
+  const contactError = document.getElementById("contact-error");
   if (contactForm) {
     contactForm.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -169,6 +240,19 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
+      if (contactError) contactError.hidden = true;
+
+      submitToFormspree(contactForm)
+        .then(() => {
+          if (contactSuccess) {
+            contactSuccess.hidden = false;
+            contactSuccess.textContent = "Merci pour votre message. Nous vous répondrons rapidement.";
+          }
+        })
+        .catch(() => {
+          if (contactError) contactError.hidden = false;
+        });
+
       const phoneNumber = "221772864894";
       const textLines = [
         `Nom complet : ${name}`,
@@ -179,41 +263,29 @@ document.addEventListener("DOMContentLoaded", () => {
       ];
       const whatsappText = encodeURIComponent(textLines.join("\n"));
       const whatsappUrl = `https://wa.me/${phoneNumber}?text=${whatsappText}`;
-
       window.open(whatsappUrl, "_blank");
-
-      if (contactSuccess) {
-        contactSuccess.hidden = false;
-        contactSuccess.textContent = "Votre message est prêt à être envoyé sur WhatsApp.";
-      }
 
       contactForm.reset();
     });
   }
 
   const inscriptionForm = document.getElementById("inscription-form");
+  const inscriptionSuccess = document.getElementById("inscription-success");
+  const inscriptionError = document.getElementById("inscription-error");
   if (inscriptionForm) {
     inscriptionForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      const eleveNom = document.getElementById("eleve-nom")?.value || "";
-      const parentNom = document.getElementById("parent-nom")?.value || "";
-      const parentPhone = document.getElementById("parent-phone")?.value || "";
-      const classe = document.getElementById("classe")?.value || "";
-      const message = document.getElementById("message")?.value || "";
 
-      const subject = encodeURIComponent("Nouvelle demande d'inscription - KYSGBS");
-      const bodyLines = [
-        `Nom de l'élève : ${eleveNom}`,
-        `Nom du parent : ${parentNom}`,
-        `Téléphone : ${parentPhone}`,
-        `Classe souhaitée : ${classe}`,
-        "",
-        "Message :",
-        message,
-      ];
-      const body = encodeURIComponent(bodyLines.join("\n"));
+      if (inscriptionError) inscriptionError.hidden = true;
 
-      window.location.href = `mailto:keuryayesokhna@gmail.com?subject=${subject}&body=${body}`;
+      submitToFormspree(inscriptionForm)
+        .then(() => {
+          if (inscriptionSuccess) inscriptionSuccess.hidden = false;
+          inscriptionForm.reset();
+        })
+        .catch(() => {
+          if (inscriptionError) inscriptionError.hidden = false;
+        });
     });
   }
 

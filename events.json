@@ -2,6 +2,7 @@
   {
     "id": "institut-ramadan-2e",
     "tag": "Mois de Ramadan",
+    "date": "2026-03-14",
     "title": "Institut du Ramadan – 2ème édition",
     "excerpt": "Pendant tout le mois de Ramadan, les élèves participent à l’Institut du Ramadan : récitation, mémorisation, rappels et ateliers adaptés à chaque âge.",
     "content": [
@@ -23,6 +24,7 @@
   {
     "id": "kysgbc-dakar-2026",
     "tag": "Partenariat",
+    "date": "2026-03-26",
     "title": "Collaboration KYSGBS x Dakar 2026",
     "excerpt": "Une collaboration entre l’école et les Jeux Olympiques de la Jeunesse Dakar 2026 autour du sport, des valeurs olympiques et de l’éducation.",
     "content": [
@@ -32,11 +34,11 @@
     ],
     "images": [
       {
-        "src": "dakar-2026-collab.png",
+        "src": "dakar-2026-collab.jpg",
         "alt": "Affiche KYSGBS Bilingual School – Dakar 2026 Youth Olympic Games"
       },
       {
-        "src": "dakar-2026-mascotte.png",
+        "src": "dakar-2026-mascotte.jpg",
         "alt": "Mascotte Dakar 2026 avec les enfants"
       }
     ]
@@ -44,6 +46,7 @@
   {
     "id": "sortie-pedagogique-lecture",
     "tag": "Sortie pédagogique",
+    "date": "2026-02-04",
     "title": "Visite pédagogique à la Base aérienne de Ouakam",
     "excerpt": "Les élèves de Keur Yaye Sokhna Gueye Bilingual School ont effectué une visite pédagogique à la Base aérienne de Ouakam, pour découvrir les métiers, l’organisation et l’univers aéronautique.",
     "content": [
@@ -53,11 +56,11 @@
     ],
     "images": [
       {
-        "src": "visite-ouakam-cover.png",
+        "src": "visite-ouakam-cover.jpg",
         "alt": "Visite pédagogique KYSGBS à la Base aérienne de Ouakam"
       },
       {
-        "src": "visite-ouakam-eleves-avion.png",
+        "src": "visite-ouakam-eleves-avion.jpg",
         "alt": "Élèves de KYSGBS devant un avion à la Base aérienne de Ouakam"
       }
     ]
@@ -65,6 +68,7 @@
   {
     "id": "sortie-pedagogique-sciences",
     "tag": "Sortie pédagogique",
+    "date": "2026-01-27",
     "title": "Visite pédagogique aux Mamelles (Phare des Mamelles)",
     "excerpt": "Les élèves de Keur Yaye Sokhna Gueye Bilingual School ont effectué une visite pédagogique aux Mamelles, à la découverte du Phare et de son histoire.",
     "content": [
@@ -74,11 +78,11 @@
     ],
     "images": [
       {
-        "src": "sortie-mamelles-cover.png",
+        "src": "sortie-mamelles-cover.jpg",
         "alt": "Visite pédagogique KYSGBS aux Mamelles (Phare des Mamelles)"
       },
       {
-        "src": "sortie-mamelles-eleves.png",
+        "src": "sortie-mamelles-eleves.jpg",
         "alt": "Élèves de KYSGBS lors de la visite aux Mamelles"
       }
     ]
@@ -86,6 +90,7 @@
   {
     "id": "ceremonie-lever-couleurs-2e-edition",
     "tag": "Événement civique",
+    "date": "2026-04-13",
     "title": "Cérémonie de levée des couleurs – 2ème édition",
     "excerpt": "Pour la 2ème année consécutive, KYSGBS a organisé une cérémonie de levée des couleurs en partenariat avec la Musique de la Gendarmerie Nationale, réunissant élèves, familles et forces de l’ordre autour des valeurs civiques et citoyennes.",
     "content": [
@@ -95,7 +100,7 @@
     ],
     "images": [
       {
-        "src": "ceremonie-lever-couleurs-partenariat-musign.png",
+        "src": "ceremonie-lever-couleurs-partenariat-musign.jpg",
         "alt": "Affiche du partenariat KYSGBS et Musique de la Gendarmerie Nationale – Levée des couleurs"
       }
     ]
