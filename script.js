@@ -292,6 +292,10 @@ document.addEventListener("DOMContentLoaded", () => {
   loadEvents().then((events) => {
     renderIndexNews(events);
     renderAllNews(events);
+    if (window.observeReveal) {
+      window.observeReveal(document.getElementById("news-list"));
+      window.observeReveal(document.getElementById("all-news-list"));
+    }
   });
 });
 
@@ -432,4 +436,114 @@ document.addEventListener("DOMContentLoaded", () => {
   }, { threshold: 0.3 });
 
   observer.observe(document.querySelector(".about-stats-section") || stats[0].closest("section"));
+})();
+
+// ===== ANIMATIONS AU DÉFILEMENT =====
+(function () {
+  const REVEAL_SELECTOR =
+    ".card, .highlight-item, .value-card, .team-card, .prog-pillar, .gallery-card, " +
+    ".blog-card, .programme-block, .news-card, .section-header, .faq-item";
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    window.observeReveal = function () {};
+    return;
+  }
+
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+  );
+
+  window.observeReveal = function (root) {
+    root = root || document;
+    root.querySelectorAll(REVEAL_SELECTOR).forEach((el) => {
+      if (el.classList.contains("is-visible")) return;
+      el.classList.add("reveal");
+      revealObserver.observe(el);
+    });
+  };
+
+  document.addEventListener("DOMContentLoaded", () => window.observeReveal());
+})();
+
+// ===== FAQ ACCORDÉON =====
+(function () {
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".faq-question").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const item = btn.closest(".faq-item");
+        const answer = item.querySelector(".faq-answer");
+        const isOpen = item.classList.toggle("is-open");
+        btn.setAttribute("aria-expanded", String(isOpen));
+        answer.hidden = !isOpen;
+      });
+    });
+  });
+})();
+
+// ===== CARROUSEL TÉMOIGNAGES =====
+(function () {
+  document.addEventListener("DOMContentLoaded", () => {
+    const carousel = document.getElementById("testimonial-carousel");
+    if (!carousel) return;
+
+    const track = carousel.querySelector(".testimonial-track");
+    const slides = Array.from(track.children);
+    const prevBtn = carousel.querySelector(".carousel-arrow--prev");
+    const nextBtn = carousel.querySelector(".carousel-arrow--next");
+    const dotsWrap = carousel.querySelector(".carousel-dots");
+    let index = 0;
+    let autoplayTimer = null;
+
+    if (slides.length <= 1) {
+      if (prevBtn) prevBtn.hidden = true;
+      if (nextBtn) nextBtn.hidden = true;
+      return;
+    }
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "carousel-dot";
+      dot.setAttribute("aria-label", `Témoignage ${i + 1}`);
+      dot.addEventListener("click", () => goTo(i));
+      dotsWrap.appendChild(dot);
+    });
+    const dots = Array.from(dotsWrap.children);
+
+    function update() {
+      track.style.transform = `translateX(-${index * 100}%)`;
+      dots.forEach((d, i) => d.classList.toggle("is-active", i === index));
+    }
+
+    function goTo(i) {
+      index = (i + slides.length) % slides.length;
+      update();
+    }
+
+    function startAutoplay() {
+      autoplayTimer = setInterval(() => goTo(index + 1), 6000);
+    }
+
+    function stopAutoplay() {
+      clearInterval(autoplayTimer);
+    }
+
+    if (prevBtn) prevBtn.addEventListener("click", () => goTo(index - 1));
+    if (nextBtn) nextBtn.addEventListener("click", () => goTo(index + 1));
+    carousel.addEventListener("mouseenter", stopAutoplay);
+    carousel.addEventListener("mouseleave", startAutoplay);
+    carousel.addEventListener("focusin", stopAutoplay);
+    carousel.addEventListener("focusout", startAutoplay);
+
+    update();
+    startAutoplay();
+  });
 })();
